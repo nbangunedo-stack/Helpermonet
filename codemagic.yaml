@@ -18,4 +18,4 @@ workflows:
           fi
     artifacts:
       - app/build/outputs/**/*.apk
-    publishing:{}
+    publishing: {}
