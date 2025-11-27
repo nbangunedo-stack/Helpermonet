@@ -1,0 +1,22 @@
+workflows:
+  android-build:
+    name: Android Debug APK (safe-gradle)
+    max_build_duration: 60
+    environment:
+      vars:
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx1536m"
+    scripts:
+      - name: Build APK
+        script: |
+          echo "Looking for ./gradlew..."
+          if [ -f "./gradlew" ]; then
+            chmod +x ./gradlew
+            ./gradlew assembleDebug
+          else
+            echo "No gradlew found, trying system 'gradle' command"
+            gradle assembleDebug
+          fi
+    artifacts:
+      - app/build/outputs/**/*.apk
+    publishing:
+      email: false
